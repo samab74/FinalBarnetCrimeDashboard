@@ -640,7 +640,7 @@ def update_correlation_scatter_plot(selected_variable, selected_ward):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8060)
+    app.run_server(debug=False)
 
 
 # In[ ]:
