@@ -173,28 +173,28 @@ app.layout = html.Div([
     html.H1("Barnet Crime Dashboard", style={'textAlign': 'center', 'padding': '10px'}),
     dcc.Tabs([
         dcc.Tab(label='LSOA Variable Heatmap', children=[
-    html.Div([
-        html.H2("Lower Layer Super Output Area (LSOA) Variable Heatmap", style={'textAlign': 'center', 'padding': '10px'}),
-        html.Label("Select Variable for Map:"),
-        dcc.Dropdown(
-            id='map-variable-dropdown',
-            options=[
-                {'label': short_names.get(var, var), 'value': var} 
-                for var in df.columns if var not in variables_to_exclude
-            ],
-            value='total_crime',  # Set default value
-            clearable=False
-        ),
-        html.Iframe(id='map', width='100%', height='600', style={'border': 'none'}),
-        html.Br(),
-        html.Label("Enter Lower Layer Super Output Area (LSOA) Name:"),
-        dcc.Input(id='lsoa-input', type='text', placeholder='Enter LSOA name', style={'width': '50%'}),
-        html.Button(id='submit-button', n_clicks=0, children='Submit', style={'margin-left': '10px'}),
-        html.Div(id='lsoa-info', style={'margin-top': '20px'}),
-        html.Div("Use the dropdown to select a variable for the map. Enter a Lower Layer Super Output Area (LSOA) name to get detailed information.", style={'margin-top': '20px', 'color': 'grey'}),
-        html.Div("Information is current as of April 2024.", style={'position': 'fixed', 'bottom': '10px', 'right': '10px', 'color': 'grey'})
-    ], style={'padding': '10px', 'border': '1px solid #ccc', 'border-radius': '5px', 'margin-bottom': '20px'}),
-]),
+            html.Div([
+                html.H2("Lower Layer Super Output Area (LSOA) Variable Heatmap", style={'textAlign': 'center', 'padding': '10px'}),
+                html.Label("Select Variable for Map:"),
+                dcc.Dropdown(
+                    id='map-variable-dropdown',
+                    options=[
+                        {'label': short_names.get(var, var), 'value': var} 
+                        for var in df.columns if var not in variables_to_exclude
+                    ],
+                    value='total_crime',  # Set default value
+                    clearable=False
+                ),
+                html.Iframe(id='map', width='100%', height='600', style={'border': 'none'}),
+                html.Br(),
+                html.Label("Enter Lower Layer Super Output Area (LSOA) Name:"),
+                dcc.Input(id='lsoa-input', type='text', placeholder='Enter LSOA name', style={'width': '50%'}),
+                html.Button(id='submit-button', n_clicks=0, children='Submit', style={'margin-left': '10px'}),
+                html.Div(id='lsoa-info', style={'margin-top': '20px'}),
+                html.Div("Use the dropdown to select a variable for the map. Enter a Lower Layer Super Output Area (LSOA) name to get detailed information.", style={'margin-top': '20px', 'color': 'grey'}),
+                html.Div("Information is current as of April 2024.", style={'position': 'fixed', 'bottom': '10px', 'right': '10px', 'color': 'grey'})
+            ], style={'padding': '10px', 'border': '1px solid #ccc', 'border-radius': '5px', 'margin-bottom': '20px'}),
+        ]),
 
         dcc.Tab(label='Bar Charts', children=[
             html.Div([
@@ -220,7 +220,6 @@ app.layout = html.Div([
                 html.H2("Barnet Crime Heatmap", style={'textAlign': 'center', 'padding': '10px'}),
                 html.Label("Select Date:"),
                 dcc.Input(id='date-input', type='text', placeholder='Enter date (YYYY-MM)', style={'width': '50%'}),
-                html.Button(id='submit-date-button', n_clicks=0, children='Submit', style={'margin-left': '10px'}),
                 html.Label("Select Crime Category:"),
                 dcc.Dropdown(
                     id='crime-category-dropdown',
@@ -231,6 +230,7 @@ app.layout = html.Div([
                 html.Br(),
                 html.A("Download Crime Heatmap", id="download-link", href="", target="_blank", style={'margin-top': '20px'}),
                 html.Div("Enter a date in YYYY-MM format and select a crime category to update the heatmap.", style={'margin-top': '20px', 'color': 'grey'}),
+                html.Div("You can select dates from 2021-06 to 2024-05.", style={'margin-top': '20px', 'color': 'grey'}),
                 html.Div("Please wait for the link to change. This process may take up to a minute.", style={'margin-top': '20px', 'color': 'red'}),
                 html.Div("Information is current as of April 2024.", style={'position': 'fixed', 'bottom': '10px', 'right': '10px', 'color': 'grey'})
             ], style={'padding': '10px', 'border': '1px solid #ccc', 'border-radius': '5px', 'margin-bottom': '20px'}),
@@ -638,9 +638,9 @@ def update_correlation_scatter_plot(selected_variable, selected_ward):
     
     return fig
 
-
 if __name__ == '__main__':
     app.run_server(debug=False)
+
 
 
 # In[ ]:
