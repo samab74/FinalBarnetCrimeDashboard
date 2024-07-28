@@ -23,7 +23,7 @@ from flask import send_from_directory
 
 # Load the GeoJSON files from URLs
 try:
-    lsoa_geojson_data = requests.get('https://github.com/samab74/Barnet-Dashboard/raw/main/lsoa_with_crime_counts.geojson').json()
+    lsoa_geojson_data = requests.get('https://raw.githubusercontent.com/samab74/Trying-New-Data/main/lsoa_with_crime_and_hmo_counts.geojson').json()
     wards_geojson_data = requests.get('https://raw.githubusercontent.com/samab74/Barnet-Dashboard/main/OSBoundaryLine%20-%20BarnetWards.geojson').json()
 except Exception as e:
     print(f"Error loading GeoJSON files: {e}")
@@ -153,8 +153,10 @@ short_names = {
     'Female': 'Female',
     'Male': 'Male',
     'Population': 'Population',
-    'total_crime': 'Total Crime'
+    'total_crime': 'Total Crime',
+    'hmo_count': 'HMO Count'  # Add this line to include HMO count
 }
+
 
 # List of variables to exclude
 variables_to_exclude = [
@@ -172,9 +174,9 @@ app.config.suppress_callback_exceptions = True
 app.layout = html.Div([
     html.H1("LSOA Dashboard", style={'textAlign': 'center', 'padding': '10px'}),
     dcc.Tabs([
-        dcc.Tab(label='LSOA Variable Heatmap', children=[
+        dcc.Tab(label='Lower Layer Super Output Area (LSOA)', children=[  # Change the tab label here
             html.Div([
-                html.H2("LSOA Variable Heatmap", style={'textAlign': 'center', 'padding': '10px'}),
+                html.H2("Lower Layer Super Output Area (LSOA) Variable Heatmap", style={'textAlign': 'center', 'padding': '10px'}),  # Change the heading here
                 html.Label("Select Variable for Map:"),
                 dcc.Dropdown(
                     id='map-variable-dropdown',
